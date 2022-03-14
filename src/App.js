@@ -18,21 +18,11 @@ function App() {
 
       <Routes>
 
-        <Route path="/">
-          <Home posts={[]} />
-        </Route>
+        <Route index element={<Home posts={[]} />} />
+
+        <Route path="/about" element={ <About /> } />
       
-        <Route path="/about" component={ About } />
-      
-        <Route path="/post">
-          <NewPost />
-        </Route>
-      
-        <Route path="/post/:id">
-          <PostPage posts={[]} />
-        </Route>
-      
-        <Route path="*" component={ Missing } />
+        <Route path="*" element={ <Missing /> } />
 
       </Routes>
 
