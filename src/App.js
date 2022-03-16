@@ -79,7 +79,7 @@ function App() {
 
       <Routes>
 
-        <Route index element={<Home posts={ posts } />} />
+        <Route index element={<Home posts={ searchResults } />} />
 
         <Route path="/about" element={ <About /> } />
       
