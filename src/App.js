@@ -11,6 +11,7 @@ import { format } from 'date-fns'
 import api from './api/posts'
 import useWindowSize from './hooks/useWindowSize'
 import useAxiosFetch from './hooks/useAxiosFetch'
+import { DataProvider } from './context/DataContext'
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -110,46 +111,52 @@ function App() {
 
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout
-        search={search}
-        setSearch={setSearch}
-        width={width}
-      />}>
+    <DataProvider>
 
-        <Route index element={<Home
-          posts={searchResults} 
-          fetchError={fetchError}
-          isLoading={isLoading}
-        />} />
+      <Routes>
+    
+        <Route path="/" element={<Layout
+          search={search}
+          setSearch={setSearch}
+          width={width}
+        />}>
 
-        <Route path="post">
-          <Route index element={<NewPost
-            handleSubmit={handleSubmit}
-            postTitle={postTitle}
-            setPostTitle={setPostTitle}
-            postBody={postBody}
-            setPostBody={setPostBody}
+          <Route index element={<Home
+            posts={searchResults} 
+            fetchError={fetchError}
+            isLoading={isLoading}
           />} />
-          <Route path=":id" element={<PostPage
+
+          <Route path="post">
+            <Route index element={<NewPost
+              handleSubmit={handleSubmit}
+              postTitle={postTitle}
+              setPostTitle={setPostTitle}
+              postBody={postBody}
+              setPostBody={setPostBody}
+            />} />
+            <Route path=":id" element={<PostPage
+              posts={posts}
+              handleDelete={handleDelete}
+            />} />
+          </Route>
+
+          <Route path="edit/:id" element={<EditPost
             posts={posts}
-            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            editTitle={editTitle}
+            setEditTitle={setEditTitle}
+            editBody={editBody}
+            setEditBody={setEditBody}
           />} />
+
+          <Route path="about" element={<About />} />
+          <Route path="*" element={<Missing />} />
         </Route>
 
-        <Route path="edit/:id" element={<EditPost
-          posts={posts}
-          handleEdit={handleEdit}
-          editTitle={editTitle}
-          setEditTitle={setEditTitle}
-          editBody={editBody}
-          setEditBody={setEditBody}
-        />} />
-
-        <Route path="about" element={<About />} />
-        <Route path="*" element={<Missing />} />
-      </Route>
-    </Routes>
+      </Routes>
+    
+    </DataProvider>
   )
 }
 
