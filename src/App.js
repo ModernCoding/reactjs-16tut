@@ -115,43 +115,18 @@ function App() {
 
       <Routes>
     
-        <Route path="/" element={<Layout
-          search={search}
-          setSearch={setSearch}
-          width={width}
-        />}>
+        <Route path="/" element={ <Layout /> }>
 
-          <Route index element={<Home
-            posts={searchResults} 
-            fetchError={fetchError}
-            isLoading={isLoading}
-          />} />
+          <Route index element={ <Home /> } />
 
           <Route path="post">
-            <Route index element={<NewPost
-              handleSubmit={handleSubmit}
-              postTitle={postTitle}
-              setPostTitle={setPostTitle}
-              postBody={postBody}
-              setPostBody={setPostBody}
-            />} />
-            <Route path=":id" element={<PostPage
-              posts={posts}
-              handleDelete={handleDelete}
-            />} />
+            <Route index element={ <NewPost /> } />
+            <Route path=":id" element={ <PostPage /> } />
           </Route>
 
-          <Route path="edit/:id" element={<EditPost
-            posts={posts}
-            handleEdit={handleEdit}
-            editTitle={editTitle}
-            setEditTitle={setEditTitle}
-            editBody={editBody}
-            setEditBody={setEditBody}
-          />} />
-
-          <Route path="about" element={<About />} />
-          <Route path="*" element={<Missing />} />
+          <Route path="edit/:id" element={ <EditPost /> } />
+          <Route path="about" element={ <About /> } />
+          <Route path="*" element={ <Missing /> } />
         </Route>
 
       </Routes>
