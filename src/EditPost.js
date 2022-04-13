@@ -1,6 +1,5 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-import { useContext } from 'react'
 import DataContext from './context/DataContext'
 
 
